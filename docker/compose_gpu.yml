@@ -9,7 +9,7 @@ services:
     privileged: true
     stdin_open: true
     tty: true
-    working_dir: /home/$USER/CMU-VLA-Challenge
+    working_dir: /home/$USER/CMU_VLA
     # Enabling Nvidia GPUs
     deploy:
       resources:
@@ -20,7 +20,7 @@ services:
               capabilities: [gpu]
     # Environment variables passed to the container
     environment:
-      - "DISPLAY"
+      - "DISPLAY=192.168.50.102:0.0"
       - "QT_X11_NO_MITSHM=1"
       - XAUTHORITY=/tmp/.docker.xauth
     # This mounts the host directories into the container 
@@ -33,6 +33,7 @@ services:
       - /home/$USER:/home/$USER:rw
 
   ubuntu20_ros:
+    runtime: nvidia
     build:
       context: .
       dockerfile: Dockerfile
@@ -41,7 +42,7 @@ services:
     privileged: true
     stdin_open: true
     tty: true
-    working_dir: /home/$USER/CMU-VLA-Challenge
+    working_dir: /home/$USER/CMU_VLA
     # Enabling Nvidia GPUs
     deploy:
       resources:
@@ -52,7 +53,7 @@ services:
               capabilities: [gpu]
     # Environment variables passed to the container
     environment:
-      - "DISPLAY"
+      - "DISPLAY=192.168.50.102:0.0"
       - "QT_X11_NO_MITSHM=1"
       - XAUTHORITY=/tmp/.docker.xauth
     # This mounts the host directories into the container 
