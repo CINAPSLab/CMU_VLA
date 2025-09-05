@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Vision Detector Node -->
+    <node name="vision_detector" pkg="smart_vlm" type="vision_detector.py" output="screen">
+        <!-- パラメータ設定（必要に応じて） -->
+        <param name="detection_threshold" value="0.3" />
+        <param name="save_debug_images" value="true" />
+        
+        <!-- トピックのリマップ（必要に応じて） -->
+        <!-- <remap from="/camera/image" to="/your_camera_topic" /> -->
+    </node>
+</launch>

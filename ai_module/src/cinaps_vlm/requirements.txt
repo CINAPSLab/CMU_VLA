@@ -1,0 +1,18 @@
+# Python dependencies for smart_vlm
+
+# ROS関連（ROSがインストール済みなら不要）
+# rospy
+# sensor_msgs
+# cv_bridge
+
+# 画像処理
+opencv-python>=4.5.0
+numpy>=1.19.0
+
+# 機械学習
+torch>=1.9.0
+transformers>=4.25.0
+pillow>=8.0.0
+
+# ユーティリティ
+scipy>=1.5.0
