@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import os
+import sys
+
+try:
+    import rospkg
+except Exception:
+    rospkg = None
+
+if rospkg is not None:
+    try:
+        pkg_path = rospkg.RosPack().get_path('cinaps_vlm')
+        src_root = os.path.dirname(pkg_path)
+        if src_root not in sys.path:
+            sys.path.insert(0, src_root)
+    except Exception:
+        pass
+
+from cinaps_vlm.llm_qa_node import LLMQANode  # type: ignore
+
+
+def main():
+    node = LLMQANode()
+    node.spin()
+
+
+if __name__ == '__main__':
+    main()

@@ -16,5 +16,6 @@ catkin_package()
 catkin_install_python(PROGRAMS
   scripts/world_model_node
   scripts/qa_node
+  scripts/exploration_manager
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

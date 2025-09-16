@@ -91,3 +91,29 @@ docker exec -it ubuntu20_ros bash
 ## 参考
 - README.md, README_ja.md も参照
 - 詳細な質問やエラーはエラーメッセージとともに相談してください 
+---
+
+## ワンコマンド起動（簡単・おすすめ）
+- 両方のコンテナ起動と、`./launch_system.sh`/`./launch_module.sh` の実行を1コマンドで自動化します。
+
+```bash
+# CPU版 compose（標準）
+bash ./run_all.sh
+
+# GPUを使う場合
+bash ./run_all.sh --gpu
+
+# そのままログを追う場合
+bash ./run_all.sh --logs
+```
+
+停止は次でOK:
+```bash
+bash ./stop_all.sh          # CPU compose
+bash ./stop_all.sh --gpu    # GPU compose
+```
+
+補足:
+- \`docker compose\` v2 が必要です
+- X11表示用に \`xhost +local:docker\` を自動試行します
+- 既存の \`./launch_system.sh\` / \`./launch_module.sh\` はそのまま利用します
