@@ -2,4 +2,4 @@
 
 sleep 3
 source ai_module/devel/setup.bash
-roslaunch dummy_vlm dummy_vlm.launch
+roslaunch cinaps_vlm world_model_node.launch

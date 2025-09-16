@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- World model node (camera+LiDAR or GT markers) -->
+  <node pkg="cinaps_vlm" type="world_model_node" name="world_model_node" output="screen">
+    <param name="use_ground_truth" value="false" />
+    <param name="object_markers_timeout" value="0.5" />
+    <param name="detection_threshold" value="0.3" />
+    <param name="merge_distance" value="0.85" />
+    <param name="stale_object_timeout" value="6.0" />
+    <!-- Curated open-vocabulary queries to boost recall for challenge objects -->
+    <rosparam param="target_objects">[
+      'sofa','couch','pillow','cushion','chair','stool','bench','bed',
+      'table','coffee table','dining table','tea table','small table','round table',
+      'nightstand','bedside table','cabinet','file cabinet','tv cabinet','tv stand','tv table','shelf','bookcase','dressing table','wardrobe','ottoman',
+      'tv','television','microwave','refrigerator','fridge','computer monitor','projector screen','screen','speaker','water cooler',
+      'lamp','lantern','vase','bowl','cup','paper cup','kettle','tray','magazine','book','books','record','framed record','framed records',
+      'picture','painting','photo','clock','guitar','flowers','flower','beer bottle','bottle','pyramid candle holder','crystal ball','sphere decoration','fossil','fan','easel','hookah','knife rack','sushi',
+      'window','door','door frame','whiteboard','fireplace','curtain','curtains','stairs','column','columns','display ledge','ledge','map wall decal','map','decal',
+      'trash can','trashcan','bin','box','folder','phone','potted plant','plant'
+    ]</rosparam>
+  </node>
+
+  <!-- QA/Scoring outputs without dummyVLM -->
+  <node pkg="cinaps_vlm" type="qa_node" name="cinaps_qa" output="screen" />
+
+  <!-- Exploration manager ensures complete coverage before answering -->
+  <node pkg="cinaps_vlm" type="exploration_manager" name="exploration_manager" output="screen">
+    <param name="voxel_size" value="0.6" />
+    <param name="coverage_threshold" value="0.9" />
+    <param name="object_settle_time" value="6.0" />
+    <param name="waypoint_distance_threshold" value="0.8" />
+    <param name="waypoint_timeout" value="20.0" />
+    <param name="use_frontier" value="true" />
+    <param name="frontier_sample_limit" value="3000" />
+    <param name="coarse_mode" value="false" />
+    <param name="coarse_frontier_stride" value="3" />
+    <param name="coarse_coverage_threshold" value="0.75" />
+    <rosparam param="waypoints">[
+      [0.0, 0.0, 0.0],
+      [3.5, 0.0, 0.0],
+      [0.0, 3.5, 90.0],
+      [-3.5, 0.0, 180.0],
+      [0.0, -3.5, -90.0],
+      [5.0, 5.0, 45.0],
+      [-5.0, 5.0, 135.0],
+      [-5.0, -5.0, -135.0],
+      [5.0, -5.0, -45.0]
+    ]</rosparam>
+  </node>
+</launch>
